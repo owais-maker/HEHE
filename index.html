@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Eman ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      color: #3b0a45;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 3em;
+      margin-top: 30px;
+    }
+    h2 {
+      color: #a80038;
+    }
+    .section {
+      margin: 50px 0;
+    }
+    .poem, .letter, .proposal {
+      max-width: 700px;
+      margin: auto;
+      background: #fff0f5;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .tagline {
+      font-style: italic;
+      margin-top: 10px;
+    }
+    #countdown {
+      font-size: 2em;
+      margin-top: 20px;
+      color: #e60073;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ff0066;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Birthday Eman 🎂</h1>
+  <div class="tagline">“You’re my today and all of my tomorrows”</div>
+
+  <div class="section" id="countdownSection">
+    <h2>Countdown to Your Special Day 🎉</h2>
+    <div id="countdown"></div>
+  </div>
+
+  <div class="section letter">
+    <h2>A Letter from Owais 💌</h2>
+    <p>
+      My dearest Eman,<br><br>
+      On this day, I celebrate the most important person in my life — YOU. 
+      You've filled my world with happiness, warmth, and love. Every moment with you is a memory I cherish, and every day without you feels incomplete.<br><br>
+      This website is a small gift, just like the place you hold in my heart — precious and unforgettable.
+    </p>
+  </div>
+
+  <div class="section poem">
+    <h2>For You, My Love ✍️</h2>
+    <p>
+      You're the poem my heart writes each day,<br>
+      In your smile, my worries melt away.<br><br>
+      You're the wish I whispered to the stars above,<br>
+      Now you're my forever, my only love.<br><br>
+      With every beat, my heart sings your name,<br>
+      And life without you wouldn’t be the same.
+    </p>
+  </div>
+
+  <div class="section proposal">
+    <h2>One Last Surprise... 💍</h2>
+    <p>
+      Eman, you’ve already made my life beautiful. Today, on your birthday, I want to take a leap of faith and ask you something from the deepest corner of my heart...
+    </p>
+    <button onclick="showProposal()">Click to Reveal 💖</button>
+    <div id="proposalText" class="hidden">
+      <h3 style="margin-top: 20px;">Will you marry me? 💍</h3>
+      <p>— Owais</p>
+    </div>
+  </div>
+
+  <!-- Confetti -->
+  <canvas id="confetti" class="hidden" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none;"></canvas>
+
+  <script>
+    // Countdown Timer
+    const countdown = document.getElementById("countdown");
+    const birthday = new Date("May 27, 2025 00:00:00").getTime();
+    const x = setInterval(function () {
+      const now = new Date().getTime();
+      const distance = birthday - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+      if (distance < 0) {
+        clearInterval(x);
+        countdown.innerHTML = "🎉 It’s Your Birthday!";
+        showConfetti();
+      }
+    }, 1000);
+
+    // Show proposal text
+    function showProposal() {
+      document.getElementById("proposalText").classList.remove("hidden");
+    }
+
+    // Confetti Animation
+    function showConfetti() {
+      const canvas = document.getElementById('confetti');
+      const ctx = canvas.getContext('2d');
+      canvas.classList.remove('hidden');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const pieces = Array.from({ length: 200 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        speed: Math.random() * 5 + 2,
+        radius: Math.random() * 5 + 2,
+        color: `hsl(${Math.random() * 360}, 100%, 50%)`
+      }));
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let p of pieces) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+          p.y += p.speed;
+          if (p.y > canvas.height) p.y = -10;
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+  </script>
+</body>
+</html>
